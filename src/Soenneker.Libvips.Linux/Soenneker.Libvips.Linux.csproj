@@ -9,7 +9,7 @@
     </PropertyGroup>
 
     <PropertyGroup>
-        <Description>Provides the native libvips shared library for Linux x64 .NET applications.</Description>
+        <Description>Provides a bundled libvips command-line distribution for Linux x64 .NET applications.</Description>
         <Version Condition="'$(BUILD_VERSION)' == ''">4.0.0</Version>
         <Version Condition="'$(BUILD_VERSION)' != ''">$(BUILD_VERSION)</Version>
         <AssemblyName>Soenneker.Libvips.Linux</AssemblyName>
@@ -40,8 +40,7 @@
         <None Include="..\..\README.md" Pack="true" PackagePath="\" />
         <None Include="..\..\LICENSE" Pack="true" PackagePath="\" />
         <None Include="..\..\icon.png" Pack="true" PackagePath="\" />
-        <None Include="Resources\linux-x64\libvips\lib\libvips.so.42" Condition="Exists('Resources\linux-x64\libvips\lib\libvips.so.42')" Pack="true" PackagePath="runtimes/linux-x64/native/" />
-        <None Include="Resources\linux-x64\libvips\THIRD-PARTY-NOTICES.md" Condition="Exists('Resources\linux-x64\libvips\THIRD-PARTY-NOTICES.md')" Pack="true" PackagePath="" />
-        <None Include="Resources\linux-x64\libvips\versions.json" Condition="Exists('Resources\linux-x64\libvips\versions.json')" Pack="true" PackagePath="" />
+        <None Include="Resources\linux-x64\libvips\**\*.*" Pack="true" PackageCopyToOutput="true"
+              PackagePath="contentFiles/any/any/Resources/linux-x64/libvips/" BuildAction="None" />
     </ItemGroup>
 </Project>
