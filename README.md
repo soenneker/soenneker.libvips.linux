@@ -1,11 +1,12 @@
 [![](https://img.shields.io/nuget/v/soenneker.libvips.linux.svg?style=for-the-badge)](https://www.nuget.org/packages/soenneker.libvips.linux/)
 [![](https://img.shields.io/github/actions/workflow/status/soenneker/soenneker.libvips.linux/build-and-test.yml?style=for-the-badge)](https://github.com/soenneker/soenneker.libvips.linux/actions/workflows/build-and-test.yml)
+[![](https://img.shields.io/github/actions/workflow/status/soenneker/soenneker.libvips.linux/publish-package.yml?style=for-the-badge)](https://github.com/soenneker/soenneker.libvips.linux/actions/workflows/publish-package.yml)
 [![](https://img.shields.io/nuget/dt/soenneker.libvips.linux.svg?style=for-the-badge)](https://www.nuget.org/packages/soenneker.libvips.linux/)
 [![](https://img.shields.io/github/actions/workflow/status/soenneker/soenneker.libvips.linux/codeql.yml?style=for-the-badge)](https://github.com/soenneker/soenneker.libvips.linux/actions/workflows/codeql.yml)
 
 # Soenneker.Libvips.Linux
 
-Provides a bundled libvips command-line distribution for Linux x64.
+The libvips command-line distribution packaged for Linux x64 .NET applications.
 
 ## Install
 
@@ -13,12 +14,16 @@ Provides a bundled libvips command-line distribution for Linux x64.
 dotnet add package Soenneker.Libvips.Linux
 ```
 
-## What it provides
+## Runtime files
 
-- Provides a bundled libvips command-line distribution for Linux x64.
-- The package copies the distribution to `Resources/linux-x64/libvips`, including `vips.sh`, the `vips` and `vipsheader` executables, and their bundled runtime files.
-- The runtime comes from [kleisauke/libvips-packaging](https://github.com/kleisauke/libvips-packaging). Third-party notices and exact component versions are included in the package.
+The package copies `vips.sh`, `vips`, `vipsheader`, and their required runtime files beneath the application output directory:
 
-## How to use it
+```text
+Resources/linux-x64/libvips/
+```
 
-Install the package, then consume the supplied build or runtime asset from your application. No service registration is required because this package exposes content rather than a callable API.
+Resolve that directory from `AppContext.BaseDirectory`; do not depend on the process working directory. This package contains Linux x64 assets only and does not select a distribution for other operating systems or architectures.
+
+Most applications should reference `Soenneker.Libvips.Util`, which selects and invokes the matching platform tool. Reference this package directly when you need the native distribution without the managed wrapper.
+
+The runtime comes from [kleisauke/libvips-packaging](https://github.com/kleisauke/libvips-packaging). Third-party notices and exact component versions are included in the package.
